@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Tulipchat Login</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+
+body{
+font-family:Arial;
+background:url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee");
+background-size:cover;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
+
+.box{
+background:white;
+padding:25px;
+width:320px;
+border-radius:10px;
+text-align:center;
+box-shadow:0 10px 25px rgba(0,0,0,0.4);
+}
+
+h2{
+color:#e91e63;
+}
+
+input{
+width:100%;
+padding:10px;
+margin:10px 0;
+border:1px solid #ccc;
+}
+
+button{
+width:100%;
+padding:12px;
+margin-top:8px;
+border:none;
+font-size:16px;
+}
+
+.login{
+background:#4CAF50;
+color:white;
+}
+
+.guest{
+background:black;
+color:white;
+}
+
+.register{
+background:#3498db;
+color:white;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="box">
+
+<h2>Tulipchat</h2>
+
+<input id="user" placeholder="Username">
+<input id="pass" type="password" placeholder="Password">
+
+<button class="login" onclick="login()">Login</button>
+
+<button class="guest" onclick="guest()">Guest Login</button>
+
+<button class="register" onclick="register()">Register</button>
+
+</div>
+
+<script>
+
+function login(){
+
+let u=document.getElementById("user").value
+let p=document.getElementById("pass").value
+
+let saved=localStorage.getItem(u)
+
+if(saved==p){
+localStorage.setItem("chatUser",u)
+window.location="chat.html"
+}
+else{
+alert("Wrong username or password")
+}
+
+}
+
+function guest(){
+
+let name=prompt("Enter your name")
+
+localStorage.setItem("chatUser",name)
+
+window.location="chat.html"
+
+}
+
+function register(){
+
+window.location="register.html"
+
+}
+
+</script>
+
+</body>
+</html>
