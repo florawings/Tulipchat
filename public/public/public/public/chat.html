@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Tulipchat</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+
+body{
+font-family:Arial;
+background:#0b1a33;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
+
+.chatbox{
+background:white;
+width:350px;
+height:500px;
+border-radius:10px;
+display:flex;
+flex-direction:column;
+box-shadow:0 10px 25px rgba(0,0,0,0.4);
+}
+
+.header{
+background:#3498db;
+color:white;
+padding:10px;
+text-align:center;
+font-size:18px;
+}
+
+.messages{
+flex:1;
+padding:10px;
+overflow:auto;
+}
+
+.input{
+display:flex;
+border-top:1px solid #ccc;
+}
+
+.input input{
+flex:1;
+padding:10px;
+border:none;
+}
+
+.input button{
+background:#2ecc71;
+border:none;
+color:white;
+padding:10px 15px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="chatbox">
+
+<div class="header">
+Tulipchat
+</div>
+
+<div id="messages" class="messages"></div>
+
+<div class="input">
+
+<input id="msg" placeholder="Type message">
+
+<button onclick="send()">Send</button>
+
+</div>
+
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+
+<script>
+
+let socket=io()
+
+let user=localStorage.getItem("chatUser")
+
+socket.emit("join",user)
+
+socket.on("message",(data)=>{
+
+let m=document.createElement("div")
+
+m.innerText=data
+
+document.getElementById("messages").appendChild(m)
+
+})
+
+function send(){
+
+let text=document.getElementById("msg").value
+
+socket.emit("chat",text)
+
+document.getElementById("msg").value=""
+
+}
+
+</script
